@@ -1,4 +1,5 @@
 import math
+import time
 
 
 def fibGen(maxIndex):
@@ -25,6 +26,19 @@ def sieveOfEra(k):
     # print(prime)
     return prime
 
+def middleSchoolPrimeFactors(m):
+    primeNums = sieveOfEra(m)
+    primeFactors = []
+    primeIndex = 0
+    while m > 1:
+        # print(m)
+        # print(primeFactors)
+        if m % primeNums[primeIndex] == 0:
+            m = m / primeNums[primeIndex]
+            primeFactors.append(primeNums[primeIndex])
+        else:
+            primeIndex += 1
+    return primeFactors
 
 def gcdEuclid(m, n, count):
     if m == 0:
@@ -125,4 +139,7 @@ def main():
     else:
         return 1
 
-main()
+# main()
+# print(middleSchoolPrimeFactors(999))
+# print(fibGen(4800)[4799])
+

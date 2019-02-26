@@ -31,21 +31,21 @@ def gcdEuclid(m, n, count):
         return [n, count - 1]
     return gcdEuclid(n % m, m, count + 1)
 
-def avgConsecutive(m):
+def avgConsecutive(n):
     sum = 0
-    n = 1
-    while n <= m:
-        sum += gcdConsecInter(m,n)[1]
-        n += 1
-    return sum/m
+    m = 1
+    while m <= n:
+        sum += gcdConsecInter(n,m)[1]
+        m += 1
+    return sum/n
 
-def avgEuclid(m):
+def avgEuclid(n):
     sum = 0
-    n = 1
-    while n <= m:
-        sum += gcdEuclidITER(m,n)[1]
-        n += 1
-    return sum/m
+    m = 1
+    while m <= n:
+        sum += gcdEuclidITER(n,m)[1]
+        m += 1
+    return sum/n
 
 def gcdEuclidITER(m, n):
     if m > 1:

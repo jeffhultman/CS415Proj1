@@ -197,7 +197,7 @@ def main():
     else:
         return 1
 
-# main()
+main()
 # print(middleSchoolPrimeFactors(999))
 # print(fibGen(4800)[4799])
 

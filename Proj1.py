@@ -3,8 +3,7 @@ import math
 
 def fibGen(maxIndex):
     fibSeq = [0, 1]
-
-    for i in range(2, maxIndex):
+    for i in range(2, maxIndex + 1):
         fibSeq.append(fibSeq[i - 1] + fibSeq[i - 2])
     return fibSeq
 
@@ -32,6 +31,21 @@ def gcdEuclid(m, n, count):
         return [n, count - 1]
     return gcdEuclid(n % m, m, count + 1)
 
+def avgConsecutive(m):
+    sum = 0
+    n = 1
+    while n <= m:
+        sum += gcdConsecInter(m,n)[1]
+        n += 1
+    return sum/m
+
+def avgEuclid(m):
+    sum = 0
+    n = 1
+    while n <= m:
+        sum += gcdEuclidITER(m,n)[1]
+        n += 1
+    return sum/m
 
 def gcdEuclidITER(m, n):
     if m > 1:
@@ -52,11 +66,12 @@ def gcdConsecInter(m, n):
     divisor = n
     count = 0
     while divisor > 0:
-        if (m % divisor == 0) & (n % divisor == 0):
-            count += 1
-            return [divisor, count]
-        divisor -= 1
         count += 1
+        if (m % divisor == 0):
+            count += 1
+            if (n % divisor == 0):
+                return [divisor, count]
+        divisor -= 1
 
 def promptForMode():
     print("Please choose a mode:")

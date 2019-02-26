@@ -58,32 +58,6 @@ def gcdConsecInter(m, n):
 
 
 def main():
-    choice = 0
-    while choice != 3:
-        choice = input("1 For Sieve, 2 For GCD (3 to quit)")
-        while choice != 1 and choice != 2 and choice != 3:
-            choice = input("1 For Sieve, 2 For GCD (3 to quit) ")
-
-        if choice == 1:
-            val = input("Please enter index for Fibonacci Sequence: (At least 2)")
-            while val < 3:
-                val = input("Please enter index for Fibonacci Sequence: (At least 2)")
-                # fib = sieveOfEra(val)
-                fib = fibGen(val + 1)
-                print("gdc(", fib[val], ",", fib[val - 1], ")")
-                div = gcdEuclidITER(fib[val], fib[val - 1])
-                print("Iterative Euclid: ", div)
-                div2 = gcdEuclid(fib[val], fib[val - 1], 0)
-                print("Recursive Euclid: ", div2)
-                div3 = gcdConsecInter(fib[val], fib[val - 1])
-                print("Consecutive Integer: ", div3)
-        elif choice == 2:
-            min()
-        elif choice == 3:
-            return
-        else:
-            pass
-
     print("Please enter index for Fibonacci Sequence: (At least 2)")
     val = int(input())
     while val < 3:

@@ -1,4 +1,7 @@
 import math
+import matplotlib.pyplot as plt
+import random
+
 
 
 def fibGen(maxIndex):
@@ -82,7 +85,11 @@ def promptForMode():
     return val
 
 def promptForTask():
-    print("Plase choose task 1, 2, or 3 (4 to quit):")
+    print("Plase choose a task:")
+    print("1: average-case efficiency of Euclid's algorithm and Consecutive integer checking algorithm")
+    print("2: worst-case efficiency of Euclid's algorithm")
+    print("3: 'Middle-school procedure' for computing the GCD")
+    print("4: exit")
     val = int(input())
     return val
 
@@ -100,9 +107,13 @@ def main():
             taskChoice = promptForTask()
         if (taskChoice == 4):
             return 0
-        # TODO
+        # DONE
         elif (taskChoice == 1):
-            print("User enters a single value of n; program outputs values of MDavg(n) and Davg(n).")
+            n = int(input("Please enter a value for n: "))
+            md = avgEuclid(n)
+            d = avgConsecutive(n)
+            print("\nMD:", md)
+            print("D:", d)
         # DONE
         elif (taskChoice == 2):
             k = int(input("Please enter a value for k: "))
@@ -111,7 +122,7 @@ def main():
             n = fib[k]
             result = gcdEuclidITER(m, n)
             print("\nGCD(", m, ",", n, "):", result[0], "\n")
-        # DONE
+        # TODO: Middle school division
         elif (taskChoice == 3):
             m = int(input("Please enter a value for m: "))
             n = int(input("Please enter a value for n: "))
@@ -121,7 +132,54 @@ def main():
             return 1
     # Scatter plot mode
     elif (modeChoice == 1):
-        print("scatter")
+        taskChoice = 0
+        while (taskChoice < 1) | (taskChoice > 4):
+            taskChoice = promptForTask()
+        if (taskChoice == 4):
+            return 0
+        # TODO
+        elif (taskChoice == 1):
+            mdvalues = []
+            mdresults = []
+            for i in range(0, 50):
+                n = random.randint(1,51)
+                result = avgEuclid(n)
+                mdvalues.append(n)
+                mdresults.append(result)
+            dvalues = []
+            dresults = []
+            for i in range(0, 50):
+                n = random.randint(1,51)
+                result = avgConsecutive(n)
+                dvalues.append(n)
+                dresults.append(result)
+            mdmatrix = (mdvalues, mdresults)
+            dmatrix = (dvalues, dresults)
+            data = (mdmatrix, dmatrix)
+            colors = ('blue', 'green')
+            groups = ('euclid', 'consecutive')
+            fig = plt.figure()
+            for data, color, group in zip(data, colors, groups):
+                x, y = data
+                plt.scatter(x, y, alpha=0.8, c=color, edgecolors='none', s=30, label=group)
+            plt.title('Euclid\'s vs Consecutive')
+            plt.legend(loc=2)
+            plt.show()
+        elif (taskChoice == 2):
+            fibs = fibGen(200)
+            values = []
+            results = []
+            for i in range(0, 199):
+                n = random.randint(1,200)
+                result = avgEuclid(n)
+                values.append(n)
+                results.append(result)
+            plt.scatter(values, results, alpha=0.5)
+            plt.title('Euclid\'s (Worst Case)')
+            plt.show()
+
+        else:
+            return 1
     else:
         return 1
 

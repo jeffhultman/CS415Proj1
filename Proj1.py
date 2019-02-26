@@ -38,6 +38,8 @@ def gcdEuclidITER(m, n):
         count = 1
     else:
         count = 0
+    if n == 0:
+        return [m, count]
     while m % n != 0:
         temp = n
         n = m % n
@@ -56,22 +58,56 @@ def gcdConsecInter(m, n):
         divisor -= 1
         count += 1
 
+def promptForMode():
+    print("Please choose a mode:")
+    print("0: User testing mode")
+    print("1: Scatter plot mode")
+    print("2: Exit")
+    val = int(input())
+    return val
+
+def promptForTask():
+    print("Plase choose task 1, 2, or 3 (4 to quit):")
+    val = int(input())
+    return val
 
 def main():
-    print("Please enter index for Fibonacci Sequence: (At least 2)")
-    val = int(input())
-    while val < 3:
-        print("Please enter index for Fibonacci Sequence: (At least 2)")
-        val = int(input())
-    # fib = sieveOfEra(val)
-    fib = fibGen(val + 1)
-    print("gdc(", fib[val], ",", fib[val - 1], ")")
-    div = gcdEuclidITER(fib[val], fib[val - 1])
-    print("Iterative Euclid: ", div)
-    div2 = gcdEuclid(fib[val], fib[val - 1], 0)
-    print("Recursive Euclid: ", div2)
-    div3 = gcdConsecInter(fib[val], fib[val - 1])
-    print("Consecutive Integer: ", div3)
-
+    modeChoice = -1
+    taskChoice = -1
+    while (modeChoice < 0) | (modeChoice > 2):
+        modeChoice = promptForMode()
+    if (modeChoice == 2):
+        return 0
+    # User test mode
+    elif (modeChoice == 0):
+        taskChoice = 0
+        while (taskChoice < 1) | (taskChoice > 4):
+            taskChoice = promptForTask()
+        if (taskChoice == 4):
+            return 0
+        # TODO
+        elif (taskChoice == 1):
+            print("User enters a single value of n; program outputs values of MDavg(n) and Davg(n).")
+        # DONE
+        elif (taskChoice == 2):
+            k = int(input("Please enter a value for k: "))
+            fib = fibGen(k + 2)
+            m = fib[k + 1]
+            n = fib[k]
+            result = gcdEuclidITER(m, n)
+            print("\nGCD(", m, ",", n, "):", result[0], "\n")
+        # DONE
+        elif (taskChoice == 3):
+            m = int(input("Please enter a value for m: "))
+            n = int(input("Please enter a value for n: "))
+            result = gcdEuclidITER(m, n)
+            print("\nGCD(", m, ",", n, "):", result[0], "\n")
+        else:
+            return 1
+    # Scatter plot mode
+    elif (modeChoice == 1):
+        print("scatter")
+    else:
+        return 1
 
 main()

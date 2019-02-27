@@ -1,5 +1,5 @@
 import math
-import time
+from timeit import default_timer as timer
 import matplotlib.pyplot as plt
 import random
 
@@ -13,7 +13,7 @@ def fibGen(maxIndex):
 
 
 def sieveOfEra(k):
-    A = [True for i in range(k)]
+    A = [True for i in range(k + 1)]
     # print (A)
     p = 2
     while p * p <= k:
@@ -29,6 +29,31 @@ def sieveOfEra(k):
     # print(prime)
     return prime
 
+def gcdByMiddleSchool(m, n):
+    if m > n:
+        leastFactors = middleSchoolPrimeFactors(m)
+        mostFactors = middleSchoolPrimeFactors(n)
+    else:
+        leastFactors = middleSchoolPrimeFactors(n)
+        mostFactors = middleSchoolPrimeFactors(m)
+    # print(leastFactors)
+    # print(mostFactors)
+    commonPrimeFactors = []
+    i = j = 0
+    # print(len(leastFactors), i, len(mostFactors), j)
+    while (i < len(leastFactors)) & (j < len(mostFactors)):
+        if leastFactors[i] == mostFactors[j]:
+            commonPrimeFactors.append(leastFactors[i])
+            i += 1
+            j += 1
+        else:
+            j += 1
+    sum = 1
+    # print(commonPrimeFactors)
+    for i in range(len(commonPrimeFactors)):
+        sum *= commonPrimeFactors[i]
+    return sum
+
 def middleSchoolPrimeFactors(m):
     primeNums = sieveOfEra(m)
     primeFactors = []
@@ -36,6 +61,8 @@ def middleSchoolPrimeFactors(m):
     while m > 1:
         # print(m)
         # print(primeFactors)
+        # if primeIndex >= len(primeNums):
+        #     return [1]
         if m % primeNums[primeIndex] == 0:
             m = m / primeNums[primeIndex]
             primeFactors.append(primeNums[primeIndex])
@@ -48,6 +75,17 @@ def gcdEuclid(m, n, count):
         return [n, count - 1]
     return gcdEuclid(n % m, m, count + 1)
 
+def timeAvgConc(n):
+    sum = 0
+    m = 1
+    while m <= n:
+        start = timer()
+        gcdConsecInter(n,m)
+        end = timer()
+        sum += (end - start)
+        m += 1
+    return sum/n
+
 def avgConsecutive(n):
     sum = 0
     m = 1
@@ -55,6 +93,26 @@ def avgConsecutive(n):
         sum += gcdConsecInter(n,m)[1]
         m += 1
     return sum/n
+
+def worstConsectutive(k):
+    sum = 0
+    fibSeq = fibGen(k)
+    for i in range(1, k):
+        sum += gcdConsecInter(fibSeq[i+1], fibSeq[i])[1]
+    return sum/k
+
+def worstEuclid(k):
+    sum = 0
+    fibSeq = fibGen(k)
+    for i in range(1, k):
+        sum += gcdEuclidITER(fibSeq[i+1], fibSeq[i])[1]
+    return sum/k
+
+def timeAvgEuclid(n):
+    start = timer()
+    avgEuclid(n)
+    end = timer()
+    return end-start
 
 def avgEuclid(n):
     sum = 0
@@ -110,6 +168,7 @@ def promptForTask():
 def main():
     modeChoice = -1
     taskChoice = -1
+    
     while (modeChoice < 0) | (modeChoice > 2):
         modeChoice = promptForMode()
     if (modeChoice == 2):
@@ -131,17 +190,23 @@ def main():
         # DONE
         elif (taskChoice == 2):
             k = int(input("Please enter a value for k: "))
-            fib = fibGen(k + 2)
-            m = fib[k + 1]
-            n = fib[k]
-            result = gcdEuclidITER(m, n)
-            print("\nGCD(", m, ",", n, "):", result[0], "\n")
+            md = worstEuclid(k)
+            d = worstConsectutive(k)
+            print("\nMD:", md)
+            print("\nD:", d)
+
+            
+            #  fib = fibGen(k + 2)
+            # m = fib[k + 1]
+            # n = fib[k]
+            # result = gcdEuclidITER(m, n)
+            # print("\nGCD(", m, ",", n, "):", result[0], "\n")
         # TODO: Middle school division
         elif (taskChoice == 3):
             m = int(input("Please enter a value for m: "))
             n = int(input("Please enter a value for n: "))
-            result = gcdEuclidITER(m, n)
-            print("\nGCD(", m, ",", n, "):", result[0], "\n")
+            result = gcdByMiddleSchool(m, n)
+            print("\nGCD(", m, ",", n, "):", result, "\n")
         else:
             return 1
     # Scatter plot mode
@@ -172,7 +237,7 @@ def main():
             data = (mdmatrix, dmatrix)
             colors = ('blue', 'green')
             groups = ('euclid', 'consecutive')
-            fig = plt.figure()
+            # fig = plt.figure()
             for data, color, group in zip(data, colors, groups):
                 x, y = data
                 plt.scatter(x, y, alpha=0.8, c=color, edgecolors='none', s=30, label=group)
@@ -180,24 +245,39 @@ def main():
             plt.legend(loc=2)
             plt.show()
         elif (taskChoice == 2):
-            fibs = fibGen(200)
+            # fibs = fibGen(200)
             values = []
             results = []
             for i in range(0, 199):
                 n = random.randint(1,200)
-                result = avgEuclid(n)
+                result = worstEuclid(n)
                 values.append(n)
                 results.append(result)
             plt.scatter(values, results, alpha=0.5)
             plt.title('Euclid\'s (Worst Case)')
             plt.show()
-
+        elif (taskChoice == 3):
+            # Complexity of middlechool gcd
+            values = []
+            results = []
+            for i in range(0, 199):
+                m = random.randint(1,199)
+                # m *= 3
+                n = random.randint(1,199)
+                # n *= 8
+                result = gcdByMiddleSchool(m, n) # Most are realitivley prime for some reason
+                values.append(n)
+                results.append(result)
+            plt.scatter(values, results, alpha=0.5)
+            plt.title('Middle School Complexity')
+            plt.show()
         else:
             return 1
     else:
         return 1
 
 main()
-# print(middleSchoolPrimeFactors(999))
+# print(gcdByMiddleSchool(90, 47))
 # print(fibGen(4800)[4799])
-
+# print(timeAvgConc(40))
+# print(timer() - timer())

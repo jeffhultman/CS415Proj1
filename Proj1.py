@@ -3,8 +3,6 @@ from timeit import default_timer as timer
 import matplotlib.pyplot as plt
 import random
 
-
-
 def fibGen(maxIndex):
     fibSeq = [0, 1]
     for i in range(2, maxIndex + 1):
@@ -36,7 +34,6 @@ def gcdByMiddleSchool(m, n):
     else:
         leastFactors = mf
         mostFactors = nf
-    commonPrimeFactors = []
     i = j = 0
     operations = 0
     sum = 1

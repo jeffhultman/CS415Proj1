@@ -183,17 +183,12 @@ def main():
         # DONE
         elif (taskChoice == 2):
             k = int(input("Please enter a value for k: "))
-            md = worstEuclid(k)
-            d = worstConsectutive(k)
-            print("\nMD:", md)
-            print("\nD:", d)
-
-            
-            #  fib = fibGen(k + 2)
-            # m = fib[k + 1]
-            # n = fib[k]
-            # result = gcdEuclidITER(m, n)
-        # TODO: Middle school division
+            fibSeq = fibGen(k + 1)
+            m = fibSeq[k + 1]
+            n = fibSeq[k]
+            results = gcdEuclidITER(m, n);
+            print("gcd(", m, ",", n, ")", "=", results[0])
+        # DONE
         elif (taskChoice == 3):
             m = int(input("Please enter a value for m: "))
             n = int(input("Please enter a value for n: "))

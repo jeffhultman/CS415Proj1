@@ -21,48 +21,41 @@ def sieveOfEra(k):
             for i in range(p * p, k, p):
                 A[i] = False
         p += 1
-    # print(A)
     prime = []
     for i in range(2, len(A)):
         if A[i]:
             prime.append(i)
-    # print(prime)
     return prime
 
 def gcdByMiddleSchool(m, n):
-    if m > n:
-        leastFactors = middleSchoolPrimeFactors(m)
-        mostFactors = middleSchoolPrimeFactors(n)
+    mf = middleSchoolPrimeFactors(m)
+    nf = middleSchoolPrimeFactors(n)
+    if len(mf) > len(nf):
+        leastFactors = nf
+        mostFactors = mf
     else:
-        leastFactors = middleSchoolPrimeFactors(n)
-        mostFactors = middleSchoolPrimeFactors(m)
-    # print(leastFactors)
-    # print(mostFactors)
+        leastFactors = mf
+        mostFactors = nf
     commonPrimeFactors = []
     i = j = 0
-    # print(len(leastFactors), i, len(mostFactors), j)
+    operations = 0
+    sum = 1
     while (i < len(leastFactors)) & (j < len(mostFactors)):
+        operations += 1
         if leastFactors[i] == mostFactors[j]:
-            commonPrimeFactors.append(leastFactors[i])
+            sum *= leastFactors[i]
             i += 1
             j += 1
         else:
             j += 1
-    sum = 1
-    # print(commonPrimeFactors)
-    for i in range(len(commonPrimeFactors)):
-        sum *= commonPrimeFactors[i]
-    return sum
+        
+    return [sum, operations, len(mostFactors)]
 
 def middleSchoolPrimeFactors(m):
     primeNums = sieveOfEra(m)
     primeFactors = []
     primeIndex = 0
     while m > 1:
-        # print(m)
-        # print(primeFactors)
-        # if primeIndex >= len(primeNums):
-        #     return [1]
         if m % primeNums[primeIndex] == 0:
             m = m / primeNums[primeIndex]
             primeFactors.append(primeNums[primeIndex])
@@ -200,12 +193,11 @@ def main():
             # m = fib[k + 1]
             # n = fib[k]
             # result = gcdEuclidITER(m, n)
-            # print("\nGCD(", m, ",", n, "):", result[0], "\n")
         # TODO: Middle school division
         elif (taskChoice == 3):
             m = int(input("Please enter a value for m: "))
             n = int(input("Please enter a value for n: "))
-            result = gcdByMiddleSchool(m, n)
+            result = gcdByMiddleSchool(m, n)[0]
             print("\nGCD(", m, ",", n, "):", result, "\n")
         else:
             return 1
@@ -260,14 +252,14 @@ def main():
             # Complexity of middlechool gcd
             values = []
             results = []
-            for i in range(0, 199):
-                m = random.randint(1,199)
+            for i in range(0, 999):
+                m = random.randint(1,999)
                 # m *= 3
-                n = random.randint(1,199)
+                n = random.randint(1,999)
                 # n *= 8
-                result = gcdByMiddleSchool(m, n) # Most are realitivley prime for some reason
-                values.append(n)
-                results.append(result)
+                result = gcdByMiddleSchool(m, n)
+                values.append(result[2])
+                results.append(result[1])
             plt.scatter(values, results, alpha=0.5)
             plt.title('Middle School Complexity')
             plt.show()
@@ -277,7 +269,3 @@ def main():
         return 1
 
 main()
-# print(gcdByMiddleSchool(90, 47))
-# print(fibGen(4800)[4799])
-# print(timeAvgConc(40))
-# print(timer() - timer())

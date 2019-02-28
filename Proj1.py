@@ -182,8 +182,8 @@ def main():
                 n = int(input("\nPlease enter a value for n: "))
                 md = avgEuclid(n)
                 d = avgConsecutive(n)
-                print("MD:", md)
-                print("D:", d)
+                print("Euclid (avg. # of modulo divisions):", md)
+                print("Consecutive (avg. # of divisions):", d)
             # DONE
             elif (taskChoice == 2):
                 k = int(input("\nPlease enter a value for k: "))

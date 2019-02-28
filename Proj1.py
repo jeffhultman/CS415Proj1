@@ -242,13 +242,15 @@ def main():
             plt.legend(loc=2)
             plt.show()
         elif (taskChoice == 2):
-            # fibs = fibGen(200)
             values = []
             results = []
+            fibSeq = fibGen(21)
             for i in range(0, 199):
-                n = random.randint(1,200)
-                result = worstEuclid(n)
-                values.append(n)
+                k = random.randint(1,20)
+                m = fibSeq[k + 1]
+                n = fibSeq[k]
+                result = gcdEuclidITER(m, n)[1]
+                values.append(m)
                 results.append(result)
             plt.scatter(values, results, alpha=0.5)
             plt.title('Euclid\'s (Worst Case)')

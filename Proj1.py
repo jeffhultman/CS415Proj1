@@ -212,18 +212,23 @@ def main():
         elif (taskChoice == 1):
             mdvalues = []
             mdresults = []
-            for i in range(0, 50):
-                n = random.randint(1,51)
-                result = avgEuclid(n)
-                mdvalues.append(n)
-                mdresults.append(result)
             dvalues = []
             dresults = []
-            for i in range(0, 50):
-                n = random.randint(1,51)
-                result = avgConsecutive(n)
+            for i in range(0, 100):
+                n = random.randint(1,71)
+                result = avgEuclid(n)
+                result2 = avgConsecutive(n)
+                mdvalues.append(n)
+                mdresults.append(result)
                 dvalues.append(n)
-                dresults.append(result)
+                dresults.append(result2)
+            # dvalues = []
+            # dresults = []
+            # for i in range(0, 50):
+            #     n = random.randint(1,51)
+            #     result = avgConsecutive(n)
+            #     dvalues.append(n)
+            #     dresults.append(result)
             mdmatrix = (mdvalues, mdresults)
             dmatrix = (dvalues, dresults)
             data = (mdmatrix, dmatrix)

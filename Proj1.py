@@ -197,7 +197,7 @@ def main():
                 m = int(input("\nPlease enter a value for m: "))
                 n = int(input("Please enter a value for n: "))
                 result = gcdByMiddleSchool(m, n)[0]
-                print("bcd(", m, ",", n, "):", result)
+                print("gcd(", m, ",", n, ") =", result)
             else:
                 break
         # Scatter plot mode

@@ -14,24 +14,6 @@
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 \graphicspath{ {./scatters/} }
 
-\lstset{frame=tb,
-	language=Java,
-	aboveskip=3mm,
-	belowskip=3mm,
-	showstringspaces=false,
-	columns=flexible,
-	basicstyle={\small\ttfamily},
-	numbers=none,
-	numberstyle=\tiny\color{gray},
-	keywordstyle=\color{blue},
-	commentstyle=\color{dkgreen},
-	stringstyle=\color{mauve},
-	breaklines=true,
-	breakatwhitespace=true,
-	tabsize=3
-}
-
-
 \begin{document}
 	\begin{flushleft}
 		\huge CS 415 Project 1
@@ -42,7 +24,7 @@
 
 		\paragraph{Average-case efficiency of Euclid's algorithm and consecutive integer checking algorithm}
 		To test the average-case efficiency of these algorithms, we generate
-		100 values of n from 1 to 70, then count the number of
+		100 random values of n from 1 to 70, then count the number of
 		operations needed to calulate the average GCD for n using
 		Euclid's algorithm and consecutive integer checking.
 
@@ -70,7 +52,7 @@
 
 		\paragraph{Worst-case efficiency of Euclid's algorithm}
 		The worst case for Euclid's algorithm occurs when two consecutive integers from the Fibonacci sequence are used as m and n. To test
-		the efficiency, we generate 200 values for k between 1 and 200. k is an index in the Fibonacci sequence, where m = k + 1 and n = k.
+		the efficiency, we generate 200 values for k between 1 and 20. k is an index in the Fibonacci sequence, where m = k + 1 and n = k.
 
 		For example, based on the start of the Fibonacci sequence: [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
 
@@ -96,16 +78,21 @@
 
 		The average case ran ~3 times faster than the worst case in our tests
 
+		\paragraph{Upper Bound of k} We decided to set our upper bound of k to 1,000 because this is the point 
+		at which the algorithm starts to take a few seconds to run. Python can handle larger values, but for the sake
+		of this empirical analysis larger values are unnecessary.
+
 		\section{Task 3}
 
 		\paragraph{The "middle-school procedure"}
-		To evaluate the complexity of the middle school method of calculating GCD, we generated 1000 pairs of integers from 1 - 999 as m and n. When plotted, the results
+		To evaluate the complexity of the middle school method of calculating GCD, we generated 1000 pairs of random integers from 1 - 999 as m and n. When plotted, the results
 		show that the middle school method is $\theta$(n).
 
 		\includegraphics{task3}
 
 		The evidence shows the complexity to be approximately linear, but there are some outliers where 
-		both m and n had prime factors, but none were common and the gcd was determined to be 1.
+		both m and n had prime factors, but none were common and the gcd was determined to be 1. Darker dots on the
+		scatter plot indicate where the majority of data points lie.
 
 
 	\end{flushleft}

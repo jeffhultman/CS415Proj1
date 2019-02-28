@@ -36,7 +36,6 @@ def gcdByMiddleSchool(m, n):
     else:
         leastFactors = mf
         mostFactors = nf
-    commonPrimeFactors = []
     i = j = 0
     operations = 0
     sum = 1
@@ -68,12 +67,23 @@ def gcdEuclid(m, n, count):
         return [n, count - 1]
     return gcdEuclid(n % m, m, count + 1)
 
-def timeAvgConc(n):
+def timeWorstEuclid(n):
+
+    sum = 0
+    fibSeq = fibGen(n)
+    for i in range(1, n):
+        start = timer()
+        gcdEuclidITER(fibSeq[i+1], fibSeq[i])[1]
+        end = timer()
+        sum += (end - start)
+    return sum/n
+
+def timeAvgEuclid(n):
     sum = 0
     m = 1
     while m <= n:
         start = timer()
-        gcdConsecInter(n,m)
+        gcdEuclidITER(n,m)
         end = timer()
         sum += (end - start)
         m += 1
@@ -101,11 +111,6 @@ def worstEuclid(k):
         sum += gcdEuclidITER(fibSeq[i+1], fibSeq[i])[1]
     return sum/k
 
-def timeAvgEuclid(n):
-    start = timer()
-    avgEuclid(n)
-    end = timer()
-    return end-start
 
 def avgEuclid(n):
     sum = 0
@@ -271,3 +276,5 @@ def main():
         return 1
 
 main()
+# print(timeAvgEuclid(5000))
+# print(timeWorstEuclid(5000))

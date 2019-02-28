@@ -187,6 +187,9 @@ def main():
             # DONE
             elif (taskChoice == 2):
                 k = int(input("\nPlease enter a value for k: "))
+                if k > 1000:
+                    print("Value of k too large, reduced to '1000'")
+                    k = 1000
                 fibSeq = fibGen(k + 1)
                 m = fibSeq[k + 1]
                 n = fibSeq[k]

@@ -237,6 +237,8 @@ def main():
                 x, y = data
                 plt.scatter(x, y, alpha=0.8, c=color, edgecolors='none', s=30, label=group)
             plt.title('Euclid\'s vs Consecutive')
+            plt.xlabel('n')
+            plt.ylabel('number of operations')
             plt.legend(loc=2)
             plt.show()
         elif (taskChoice == 2):
@@ -252,6 +254,8 @@ def main():
                 results.append(result)
             plt.scatter(values, results, alpha=0.5)
             plt.title('Euclid\'s (Worst Case)')
+            plt.xlabel('m')
+            plt.ylabel('number of modulo divisions')
             plt.show()
         elif (taskChoice == 3):
             # Complexity of middlechool gcd
@@ -267,6 +271,8 @@ def main():
                 results.append(result[1])
             plt.scatter(values, results, alpha=0.5)
             plt.title('Middle School Complexity')
+            plt.xlabel('max(|prime factors of m|, |prime factors of n|)')
+            plt.ylabel('number of comparisons')
             plt.show()
         else:
             return 1

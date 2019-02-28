@@ -145,7 +145,7 @@ def gcdConsecInter(m, n):
         divisor -= 1
 
 def promptForMode():
-    print("Please choose a mode:")
+    print("\nPlease choose a mode:")
     print("0: User testing mode")
     print("1: Scatter plot mode")
     print("2: Exit")
@@ -153,7 +153,7 @@ def promptForMode():
     return val
 
 def promptForTask():
-    print("Plase choose a task:")
+    print("\nPlase choose a task:")
     print("1: average-case efficiency of Euclid's algorithm and Consecutive integer checking algorithm")
     print("2: worst-case efficiency of Euclid's algorithm")
     print("3: 'Middle-school procedure' for computing the GCD")
@@ -162,122 +162,123 @@ def promptForTask():
     return val
 
 def main():
-    modeChoice = -1
-    taskChoice = -1
-    
-    while (modeChoice < 0) | (modeChoice > 2):
-        modeChoice = promptForMode()
-    if (modeChoice == 2):
-        return 0
-    # User test mode
-    elif (modeChoice == 0):
-        taskChoice = 0
-        while (taskChoice < 1) | (taskChoice > 4):
-            taskChoice = promptForTask()
-        if (taskChoice == 4):
-            return 0
-        # DONE
-        elif (taskChoice == 1):
-            n = int(input("Please enter a value for n: "))
-            md = avgEuclid(n)
-            d = avgConsecutive(n)
-            print("\nMD:", md)
-            print("D:", d)
-        # DONE
-        elif (taskChoice == 2):
-            k = int(input("Please enter a value for k: "))
-            fibSeq = fibGen(k + 1)
-            m = fibSeq[k + 1]
-            n = fibSeq[k]
-            results = gcdEuclidITER(m, n);
-            print("gcd(", m, ",", n, ")", "=", results[0])
-        # DONE
-        elif (taskChoice == 3):
-            m = int(input("Please enter a value for m: "))
-            n = int(input("Please enter a value for n: "))
-            result = gcdByMiddleSchool(m, n)[0]
-            print("\nGCD(", m, ",", n, "):", result, "\n")
-        else:
-            return 1
-    # Scatter plot mode
-    elif (modeChoice == 1):
-        taskChoice = 0
-        while (taskChoice < 1) | (taskChoice > 4):
-            taskChoice = promptForTask()
-        if (taskChoice == 4):
-            return 0
-        # TODO
-        elif (taskChoice == 1):
-            mdvalues = []
-            mdresults = []
-            dvalues = []
-            dresults = []
-            for i in range(0, 100):
-                n = random.randint(1,71)
-                result = avgEuclid(n)
-                result2 = avgConsecutive(n)
-                mdvalues.append(n)
-                mdresults.append(result)
-                dvalues.append(n)
-                dresults.append(result2)
-            # dvalues = []
-            # dresults = []
-            # for i in range(0, 50):
-            #     n = random.randint(1,51)
-            #     result = avgConsecutive(n)
-            #     dvalues.append(n)
-            #     dresults.append(result)
-            mdmatrix = (mdvalues, mdresults)
-            dmatrix = (dvalues, dresults)
-            data = (mdmatrix, dmatrix)
-            colors = ('blue', 'green')
-            groups = ('euclid', 'consecutive')
-            # fig = plt.figure()
-            for data, color, group in zip(data, colors, groups):
-                x, y = data
-                plt.scatter(x, y, alpha=0.8, c=color, edgecolors='none', s=30, label=group)
-            plt.title('Euclid\'s vs Consecutive')
-            plt.xlabel('n')
-            plt.ylabel('number of operations')
-            plt.legend(loc=2)
-            plt.show()
-        elif (taskChoice == 2):
-            values = []
-            results = []
-            fibSeq = fibGen(21)
-            for i in range(0, 199):
-                k = random.randint(1,20)
+    while (1):
+        modeChoice = -1
+        taskChoice = -1
+        
+        while (modeChoice < 0) | (modeChoice > 2):
+            modeChoice = promptForMode()
+        if (modeChoice == 2):
+            break
+        # User test mode
+        elif (modeChoice == 0):
+            taskChoice = 0
+            while (taskChoice < 1) | (taskChoice > 4):
+                taskChoice = promptForTask()
+            if (taskChoice == 4):
+                break
+            # DONE
+            elif (taskChoice == 1):
+                n = int(input("\nPlease enter a value for n: "))
+                md = avgEuclid(n)
+                d = avgConsecutive(n)
+                print("MD:", md)
+                print("D:", d)
+            # DONE
+            elif (taskChoice == 2):
+                k = int(input("\nPlease enter a value for k: "))
+                fibSeq = fibGen(k + 1)
                 m = fibSeq[k + 1]
                 n = fibSeq[k]
-                result = gcdEuclidITER(m, n)[1]
-                values.append(m)
-                results.append(result)
-            plt.scatter(values, results, alpha=0.5)
-            plt.title('Euclid\'s (Worst Case)')
-            plt.xlabel('m')
-            plt.ylabel('number of modulo divisions')
-            plt.show()
-        elif (taskChoice == 3):
-            # Complexity of middlechool gcd
-            values = []
-            results = []
-            for i in range(0, 999):
-                m = random.randint(1,999)
-                # m *= 3
-                n = random.randint(1,999)
-                # n *= 8
-                result = gcdByMiddleSchool(m, n)
-                values.append(result[2])
-                results.append(result[1])
-            plt.scatter(values, results, alpha=0.5)
-            plt.title('Middle School Complexity')
-            plt.xlabel('max(|prime factors of m|, |prime factors of n|)')
-            plt.ylabel('number of comparisons')
-            plt.show()
+                results = gcdEuclidITER(m, n);
+                print("gcd(", m, ",", n, ")", "=", results[0])
+            # DONE
+            elif (taskChoice == 3):
+                m = int(input("\nPlease enter a value for m: "))
+                n = int(input("Please enter a value for n: "))
+                result = gcdByMiddleSchool(m, n)[0]
+                print("bcd(", m, ",", n, "):", result)
+            else:
+                break
+        # Scatter plot mode
+        elif (modeChoice == 1):
+            taskChoice = 0
+            while (taskChoice < 1) | (taskChoice > 4):
+                taskChoice = promptForTask()
+            if (taskChoice == 4):
+                break
+            # TODO
+            elif (taskChoice == 1):
+                mdvalues = []
+                mdresults = []
+                dvalues = []
+                dresults = []
+                for i in range(0, 100):
+                    n = random.randint(1,71)
+                    result = avgEuclid(n)
+                    result2 = avgConsecutive(n)
+                    mdvalues.append(n)
+                    mdresults.append(result)
+                    dvalues.append(n)
+                    dresults.append(result2)
+                # dvalues = []
+                # dresults = []
+                # for i in range(0, 50):
+                #     n = random.randint(1,51)
+                #     result = avgConsecutive(n)
+                #     dvalues.append(n)
+                #     dresults.append(result)
+                mdmatrix = (mdvalues, mdresults)
+                dmatrix = (dvalues, dresults)
+                data = (mdmatrix, dmatrix)
+                colors = ('blue', 'green')
+                groups = ('euclid', 'consecutive')
+                # fig = plt.figure()
+                for data, color, group in zip(data, colors, groups):
+                    x, y = data
+                    plt.scatter(x, y, alpha=0.8, c=color, edgecolors='none', s=30, label=group)
+                plt.title('Euclid\'s vs Consecutive')
+                plt.xlabel('n')
+                plt.ylabel('number of operations')
+                plt.legend(loc=2)
+                plt.show()
+            elif (taskChoice == 2):
+                values = []
+                results = []
+                fibSeq = fibGen(21)
+                for i in range(0, 199):
+                    k = random.randint(1,20)
+                    m = fibSeq[k + 1]
+                    n = fibSeq[k]
+                    result = gcdEuclidITER(m, n)[1]
+                    values.append(m)
+                    results.append(result)
+                plt.scatter(values, results, alpha=0.5)
+                plt.title('Euclid\'s (Worst Case)')
+                plt.xlabel('m')
+                plt.ylabel('number of modulo divisions')
+                plt.show()
+            elif (taskChoice == 3):
+                # Complexity of middlechool gcd
+                values = []
+                results = []
+                for i in range(0, 999):
+                    m = random.randint(1,999)
+                    # m *= 3
+                    n = random.randint(1,999)
+                    # n *= 8
+                    result = gcdByMiddleSchool(m, n)
+                    values.append(result[2])
+                    results.append(result[1])
+                plt.scatter(values, results, alpha=0.5)
+                plt.title('Middle School Complexity')
+                plt.xlabel('max(|prime factors of m|, |prime factors of n|)')
+                plt.ylabel('number of comparisons')
+                plt.show()
+            else:
+                break
         else:
-            return 1
-    else:
-        return 1
+            break
 
 main()
 # print(timeAvgEuclid(5000))

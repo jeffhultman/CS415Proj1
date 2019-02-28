@@ -18,7 +18,7 @@ def sieveOfEra(k):
     p = 2
     while p * p <= k:
         if A[p]:
-            for i in range(p * p, k, p):
+            for i in range(p * p, k + 1, p):
                 A[i] = False
         p += 1
     # print(A)
@@ -30,12 +30,14 @@ def sieveOfEra(k):
     return prime
 
 def gcdByMiddleSchool(m, n):
-    if m > n:
-        leastFactors = middleSchoolPrimeFactors(m)
-        mostFactors = middleSchoolPrimeFactors(n)
+    mFactors = middleSchoolPrimeFactors(m)
+    nFactors = middleSchoolPrimeFactors(n)
+    if len(mFactors) < len(nFactors):
+        mostFactors = nFactors
+        leastFactors = mFactors
     else:
-        leastFactors = middleSchoolPrimeFactors(n)
-        mostFactors = middleSchoolPrimeFactors(m)
+        mostFactors = mFactors
+        leastFactors = nFactors
     # print(leastFactors)
     # print(mostFactors)
     commonPrimeFactors = []
@@ -277,7 +279,8 @@ def main():
         return 1
 
 main()
-# print(gcdByMiddleSchool(90, 47))
+# print(sieveOfEra(230))
+# print(gcdByMiddleSchool(5, 230))
 # print(fibGen(4800)[4799])
 # print(timeAvgConc(40))
 # print(timer() - timer())

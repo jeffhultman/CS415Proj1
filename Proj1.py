@@ -273,6 +273,6 @@ def main():
     else:
         return 1
 
-main()
-# print(timeAvgEuclid(5000))
-# print(timeWorstEuclid(5000))
+# main()
+print(timeAvgEuclid(5000))
+print(timeWorstEuclid(5000))

@@ -84,6 +84,18 @@
 		is $\theta$(logn). We saw a trend that respresents a complexity of $\theta$(logn) in the average case as well, however the number
 		of modulo divisions tended to be lower than how many were needed in the worst case.
 
+		\paragraph{Time Analysis}
+
+		We analyzed the time taken by Euclid's algorithm in the average and worst case by testing 5000 values. For the average case,
+		we use values from 0 - 4999, and for he worst case we use consecutive Fibonacci numbers leading up until 
+		position 5000 in the sequence.
+		
+		\textbf{Average Case:} 0.00000109137s
+
+		\textbf{Worst Case: } 0.001714296s
+
+		The average case ran ~3 times faster than the worst case in our tests
+
 		\section{Task 3}
 
 		\paragraph{The "middle-school procedure"}

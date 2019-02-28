@@ -18,7 +18,7 @@ def sieveOfEra(k):
     p = 2
     while p * p <= k:
         if A[p]:
-            for i in range(p * p, k, p):
+            for i in range(p * p, k + 1, p):
                 A[i] = False
         p += 1
     prime = []

@@ -89,3 +89,4 @@ Please choose a mode:
 ```
 
 ## Extra Credit Feedback
+We gave feedback to the team of Maurice Becnel and Jasmine Valverde-De La, and received feeback from them as well.

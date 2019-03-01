@@ -216,8 +216,8 @@ def main():
                 mdresults = []
                 dvalues = []
                 dresults = []
-                for i in range(0, 100):
-                    n = random.randint(1,71)
+                for i in range(1, 101):
+                    n = i
                     result = avgEuclid(n)
                     result2 = avgConsecutive(n)
                     mdvalues.append(n)
